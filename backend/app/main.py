@@ -24,4 +24,3 @@ app.include_router(blueprint.router, prefix="/api")
 @app.get("/")
 async def read_root():
     return {"message": "SALSA Backend is running"}
-
