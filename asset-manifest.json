@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/SALSAA/static/css/main.a416f479.css",
+    "main.js": "/SALSAA/static/js/main.d5f972c4.js",
+    "static/js/453.20359781.chunk.js": "/SALSAA/static/js/453.20359781.chunk.js",
+    "index.html": "/SALSAA/index.html",
+    "main.a416f479.css.map": "/SALSAA/static/css/main.a416f479.css.map",
+    "main.d5f972c4.js.map": "/SALSAA/static/js/main.d5f972c4.js.map",
+    "453.20359781.chunk.js.map": "/SALSAA/static/js/453.20359781.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a416f479.css",
+    "static/js/main.d5f972c4.js"
+  ]
+}
