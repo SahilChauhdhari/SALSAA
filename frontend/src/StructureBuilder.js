@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import * as THREE from "three";
 import axios from "axios";
 import "./StructureBuilder.css";
+import API_BASE_URL from './config';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const SHAPES = ["Pyramid", "Cube", "Cuboid", "Sphere", "Cylinder", "Cone"];
@@ -179,11 +180,11 @@ function StructureViewer({ shape, diameter, structureType, loadRatio, dropTrigge
   useEffect(() => {
     const el = mountRef.current;
     if (!el) return;
-    const s = stateRef.current;
-    if (s.raf) cancelAnimationFrame(s.raf);
-    if (s.renderer) {
-      s.renderer.dispose();
-      if (el.contains(s.renderer.domElement)) el.removeChild(s.renderer.domElement);
+    const st = stateRef.current;
+    if (st.raf) cancelAnimationFrame(st.raf);
+    if (st.renderer) {
+      st.renderer.dispose();
+      if (el.contains(st.renderer.domElement)) el.removeChild(st.renderer.domElement);
     }
 
     const W = el.clientWidth, H = el.clientHeight;
@@ -332,12 +333,12 @@ function StructureViewer({ shape, diameter, structureType, loadRatio, dropTrigge
     const resize = () => { renderer.setSize(el.clientWidth, el.clientHeight); camera.aspect = el.clientWidth / el.clientHeight; camera.updateProjectionMatrix(); };
     window.addEventListener("resize", resize);
     return () => {
-      if(stateRef.current.raf) cancelAnimationFrame(stateRef.current.raf);
+      if(st.raf) cancelAnimationFrame(st.raf);
       window.removeEventListener("resize", resize);
       if (el.contains(renderer.domElement)) el.removeChild(renderer.domElement);
       renderer.dispose();
     };
-  }, [shape, diameter, structureType]);
+  }, [shape, diameter, structureType, onDropComplete]);
 
   useEffect(() => {
     if (!dropTrigger) return;
@@ -378,7 +379,7 @@ export default function StructureBuilder() {
     try {
       setLoading(true);
       setError(null);
-      const res = await axios.post("http://localhost:8000/api/analyze-structure", {
+      const res = await axios.post(`${API_BASE_URL}/api/analyze-structure`, {
         shape,
         structure_type: structureType,
         diameter,
@@ -425,7 +426,8 @@ export default function StructureBuilder() {
     <div className="structure-page">
       <div className="section-header">
         <div className="section-title">Structure Builder</div>
-        <div className="section-sub">// advanced structural simulation & analysis engine</div>
+        {/* advanced structural simulation & analysis engine */}
+        <div className="section-sub"></div>
       </div>
 
       <div className="viewer-container">
