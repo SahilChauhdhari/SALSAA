@@ -8,6 +8,8 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",
     "http://localhost:3001",
+    "https://sahilchauhdhari.github.io",
+    "https://salsa-analysis-engine2.onrender.com",
 ]
 
 app.add_middleware(
